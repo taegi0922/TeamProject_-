@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   <mapper namespace="com.medicalInfo.project.mapper.QaMapper">
+  
+  	<select id="allList" resultType="com.medicalInfo.project.model.QaDTO">
+  		   SELECT qa_id, writer, member_num, title, created_at, context, member_type AS memberType, prescript_no, viewcnt
+           FROM qa ORDER BY created_at DESC
+  	</select>
+  	
+  	<delete id="deleteQa"  parameterType="com.medicalInfo.project.model.QaDTO">
+  		DELETE FROM qa WHERE qa_id = #{qa_id}
+  	</delete>
+  	
+  	<update id="updateQaPre" parameterType="com.medicalInfo.project.model.QaDTO">
+		UPDATE qa SET title = #{title} , context = #{context} , writer = #{writer} , prescript_no = #{prescript_no} WHERE qa_id = #{qa_id}
+	</update>
+	
+	<update id="updateQa" parameterType="com.medicalInfo.project.model.QaDTO">
+		UPDATE qa SET title = #{title} , context = #{context} , writer = #{writer},prescript_no = null WHERE qa_id = #{qa_id}
+	</update>
+  	
+  	<insert id="insertQa" parameterType="com.medicalInfo.project.model.QaDTO">
+  		insert into qa (writer, member_num,title,context,member_type,prescript_no) 
+  		values(#{writer},#{member_num},#{title},#{context},#{member_type},#{prescript_no})
+  	</insert>
+  	
+  	<insert id="QaInsert" parameterType="com.medicalInfo.project.model.QaDTO">
+  		insert into qa (writer, member_num,title,context,member_type) 
+  		values(#{writer},#{member_num},#{title},#{context},#{member_type})
+  	</insert>
+  	
+  	<select id="getList" resultType="com.medicalInfo.project.model.QaDTO">
+  		SELECT qa_id,title,writer,context,member_num,created_at,member_type,prescript_no,viewcnt FROM qa WHERE qa_id = #{qa_id}
+  	</select>
+  	
+  	<select id="getListWithPasing" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.QaDTO">
+		SELECT qa_id, writer, member_num, title, created_at, context, member_type , prescript_no, viewcnt  FROM qa ORDER BY created_at DESC  LIMIT #{start}, #{amount}
+	</select>
+	
+	<select id="getMyPrescripts" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.PrescriptDTO">
+		SELECT *  FROM prescript WHERE memberNum = #{memberNum} ORDER BY prescribed_date DESC  LIMIT #{start}, #{amount}
+	</select>
+	
+	<select id="getMyPrescriptsCount" resultType="int" parameterType="int">
+		SELECT COUNT(prescript_no) FROM prescript where memberNum = #{memberNum};
+	</select>
+	
+	<select id="getTotalCount" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(qa_id) FROM qa
+	</select>
+	
+	<select id="getListTotalCount" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(qa_id) FROM qa 
+		<where>
+			<if test="type != null and keyword != null and type != '' and keyword != ''">
+				<choose>
+					<when test="type == 'all'">
+					(title LIKE CONCAT("%",#{keyword},"%") OR
+					writer LIKE CONCAT("%",#{keyword},"%")OR
+					context LIKE CONCAT("%",#{keyword},"%"))
+					</when>
+					<otherwise>
+						<if test="type == 'title'">
+                        title LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                    <if test="type == 'writer'">
+                        writer LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                    <if test="type == 'context'">
+                        context LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<select id="getListWithSearch" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.QaDTO">
+		SELECT qa_id, writer, member_num, title, created_at, context, member_type , prescript_no,viewcnt FROM qa 
+		<where>
+			<if test="type != null and keyword != null and type != '' and keyword != ''">
+				<choose>
+					<when test="type == 'all'">
+					(title LIKE CONCAT("%",#{keyword},"%") OR
+				     writer LIKE CONCAT("%",#{keyword},"%") OR
+				      context LIKE CONCAT("%",#{keyword},"%"))
+					</when>
+					<otherwise>
+					<if test="type == 'title'">
+                        title LIKE CONCAT("%", #{keyword}, "%")
+                    </if>
+                    <if test="type == 'writer'">
+                        writer LIKE CONCAT("%", #{keyword}, "%")
+                    </if>
+                    <if test="type == 'context'">
+                        context LIKE CONCAT("%", #{keyword}, "%")
+                    </if>
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		ORDER BY created_at DESC LIMIT #{start}, #{amount}
+	</select>
+	
+	<select id="MyPrescript" parameterType="com.medicalInfo.project.model.QaDTO" resultType="com.medicalInfo.project.model.PrescriptDTO">
+		SELECT * FROM prescript WHERE prescript_no = #{prescript_no};
+	</select>
+	
+	<select id="registerMyPrescript" parameterType="com.medicalInfo.project.model.PrescriptDTO" resultType="com.medicalInfo.project.model.PrescriptDTO"  >
+		SELECT prescribed_date,prescript_no,patient_name,patient_phone,institution_address,expert_name,memberNum
+		FROM prescript WHERE memberNum = #{memberNum};
+	</select>
+	
+	<select id="getPrescriptDetial" parameterType="com.medicalInfo.project.model.PrescriptDTO" resultType="com.medicalInfo.project.model.PrescriptDetailDTO"  >
+		SELECT prescript_no, medicine_name, per_day, total_day, addordrop, detail_comment
+		FROM prescripted_detail WHERE prescript_no = #{prescript_no};
+	</select>
+	
+	<select id="countRating" parameterType="com.medicalInfo.project.model.RatingDTO" resultType="int">
+		SELECT count(*) from rating where memberNum = #{memberNum} and ratedqa_no = #{ratedqa_no} and expertNum = #{expertNum} and ratedtable_type = 'QACOMMENT' ; 
+	</select>
+	
+	<select id="getQaByQaNo" resultType="com.medicalInfo.project.model.QaDTO" parameterType="int">
+		SELECT title,context,writer,created_at,qa_id from qa where qa_id = #{ratedqa_no};
+	</select>
+		
+	<select id="getPrescriptByNo" resultType="com.medicalInfo.project.model.PrescriptDTO" parameterType="int">
+		SELECT * FROM  prescript WHERE prescript_no = #{prescript_no} ;
+	</select>
+	
+	<!-- 미나님거- -->
+	 <select id="selectQaList" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.QaDTO">
+  		SELECT * FROM qa WHERE member_num = #{member_num} ORDER BY qa_id DESC LIMIT ${start }, ${amount }
+  	</select>
+  	
+  	 <select id="getQaTotal" parameterType="com.medicalInfo.project.model.Criteria" resultType="int">
+  		SELECT COUNT(qa_id) FROM qa WHERE member_num = #{member_num} ORDER BY qa_id DESC LIMIT 0, 10;
+  	</select>
+  	
+  	<select id="selectQaCommentList" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.CommentDTO">
+  		SELECT * FROM comment WHERE writer = #{member_num} AND table_type = "QA" ORDER BY comment_id DESC LIMIT ${start }, ${amount }
+  	</select>
+  	
+  	<select id="getQaCommentTotal" parameterType="com.medicalInfo.project.model.Criteria" resultType="int">
+  		SELECT COUNT(comment_id) FROM comment WHERE writer = #{member_num} AND table_type = "QA" ORDER BY comment_id DESC LIMIT 0, 10;
+  	</select>
+  	
+  	<update id="incrementViewCnt" parameterType="int">
+		UPDATE qa SET viewcnt = viewcnt+1 WHERE qa_id = #{qa_id} 
+	</update>
+	
+  </mapper>

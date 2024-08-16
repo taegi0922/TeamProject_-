@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.medicalInfo.project.mapper.PrescriptDetailMapper">
+
+	<select id="select" resultType="com.medicalInfo.project.model.PrescriptDetailDTO">
+  		SELECT prescript_detailID, prescript_no, medicine_name, per_day, total_day, addordrop, comment FROM prescripted_detail WHERE prescript_no = #{prescript_no}
+  	</select>
+  	
+  	 <insert id="insert" parameterType="com.medicalInfo.project.model.RatingDTO">
+		INSERT INTO rating (memberNum, ratedtable_type, membertype, ratedtprescript_no, rate, expertNum, expertype) 
+  		VALUES (#{memberNum},#{ratedtable_type},#{membertype},#{ratedtprescript_no},#{rate},#{expertNum},#{expertype})
+	</insert>
+	
+	<insert id="insertPrescriptDetail" parameterType="com.medicalInfo.project.model.PrescriptDetailDTO">
+		INSERT INTO prescripted_detail (prescript_no,medicine_no,medicine_name,per_day,total_day,addordrop,detail_comment)
+		VALUES (#{prescript_no},#{medicine_no},#{medicine_name},#{per_day},#{total_day},#{addordrop},#{detail_comment})
+	</insert>
+	
+	<select id="countPrescriptRating" parameterType="com.medicalInfo.project.model.RatingDTO" resultType="int">
+		SELECT count(*) from rating where memberNum = #{memberNum} and ratedtprescript_no = #{ratedtprescript_no} and expertNum = #{expertNum} and ratedtable_type = 'PRESCRIPT' ; 
+	</select>
+  </mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.medicalInfo.project.mapper.PrescriptMapper">
+  
+  	<select id="select" resultType="com.medicalInfo.project.model.PrescriptDTO">
+  		SELECT * FROM prescript WHERE prescript_no = #{prescript_no}
+  	</select>
+  
+  	<select id="selectMemberNum" resultType="com.medicalInfo.project.model.PrescriptDTO">
+  		SELECT * FROM prescript WHERE memberNum = #{memberNum}
+  	</select>
+  	
+  	<select id="getTotal" parameterType="com.medicalInfo.project.model.Criteria" resultType="int">
+  		SELECT COUNT(prescript_no) FROM prescript WHERE memberNum = #{memberNum} ORDER BY prescript_no DESC LIMIT 0, 10;
+  	</select>
+
+  	<select id="selectAll" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.PrescriptDTO">
+  		SELECT * FROM prescript
+  		WHERE memberNum = ${memberNum} ORDER BY prescript_no DESC LIMIT ${start }, ${amount }
+  	</select>
+	
+  	
+  	<!-- EXPERT Query -->
+  	<select id="selectExpertAll" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.PrescriptDTO">
+  		SELECT * FROM prescript
+  		WHERE memberNum_expert = ${memberNum_expert} ORDER BY prescript_no DESC LIMIT ${start }, ${amount }
+  	</select>
+  	<select id="getExpertTotal" parameterType="com.medicalInfo.project.model.Criteria" resultType="int">
+  		SELECT COUNT(prescript_no) FROM prescript WHERE memberNum_expert = #{memberNum_expert} ORDER BY prescript_no DESC LIMIT 0, 10;
+  	</select>
+  	
+  		<select id="showMyPrescription" resultType="com.medicalInfo.project.model.PrescriptDTO">
+		SELECT * FROM prescript WHERE memberNum_expert = #{memberNum} ORDER BY prescript_no DESC
+	</select>
+	
+	<insert id="insertPrescript" parameterType="com.medicalInfo.project.model.PrescriptDTO">
+		INSERT INTO prescript (patient_name,memberId,patient_phone,institution_address,expert_name,memberNum_expert,membertype_expert) 
+		VALUES(#{patient_name},#{memberId},#{patient_phone},#{institution_address},#{expert_name},#{memberNum_expert},#{membertype_expert})
+	</insert>
+  <!-- mapper.xml의 id와 mapper 인터페이스의 메서드 명을 맞춰야 매핑 -->
+  <!-- reusltType 반환 타입을 의미 -->
+  	<select id="getPresriptID" resultType="int">
+  		SELECT prescript_no FROM prescript ORDER BY prescript_no DESC LIMIT 1
+  	</select>
+  	
+  	<insert id="insertMemPrescript" parameterType="com.medicalInfo.project.model.PrescriptDTO">
+		INSERT INTO prescript (patient_name,memberId,patient_phone,memberNum,member_type,institution_address,expert_name,memberNum_expert,membertype_expert) 
+		VALUES(#{patient_name},#{memberId},#{patient_phone},#{memberNum},#{member_type},#{institution_address},#{expert_name},#{memberNum_expert},#{membertype_expert})
+	</insert>
+	
+	<select id="getPrescript" resultType="com.medicalInfo.project.model.PrescriptDTO">
+		SELECT * FROM prescript WHERE prescript_no = #{prescript_no} ORDER BY prescribed_date DESC
+	</select>
+	
+	<select id="getPrescriptTotal" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(prescript_no) FROM prescript 
+		<where>
+			<if test="keyword != null and keyword != ''">
+			memberId LIKE CONCAT("%",#{keyword},"%");
+			</if>
+		</where>
+	</select>
+	
+	<select id="getPreList" resultType="com.medicalInfo.project.model.PrescriptDTO" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT * FROM prescript
+		 <where>
+			<if test="keyword != null and keyword != ''">
+			memberId LIKE CONCAT("%",#{keyword},"%")
+			</if>
+		</where>
+		 ORDER BY prescribed_date DESC LIMIT #{start}, #{amount};
+	</select>
+  </mapper>

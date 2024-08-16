@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.medicalInfo.project.mapper.WaitForExpertMapper">
+
+    <select id="getExpertInfo" resultType="com.medicalInfo.project.model.WaitForExpertDTO">
+        SELECT * FROM waitforexpert WHERE memberNum = #{memberNum}
+    </select>
+
+	<delete id="delWaitForExpert">
+		DELETE FROM waitforexpert WHERE waitforexpertId = #{waitforexpertId} 
+    </delete>
+	
+	<update id="modMemberInfo" parameterType="com.medicalInfo.project.model.WaitForExpertDTO">
+		UPDATE member_info SET memberType = 'EXPERT',institutionName = #{institutionName}, institutionAddress = #{institutionAddress}, license = #{license}, institutionTel=#{institutionTel}, pictureName=#{pictureName}, picuniName=#{picuniName}, picType=#{picType}, fileName=#{fileName}, uniqueName=#{uniqueName}, fileType=#{fileType} WHERE memberNum =#{memberNum}
+	</update>
+	
+	<select id="getWFEById" resultType="com.medicalInfo.project.model.WaitForExpertDTO">
+		SELECT * FROM waitforexpert WHERE waitforexpertId = #{waitforexpertId}
+	</select>
+</mapper>

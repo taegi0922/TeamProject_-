@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.medicalInfo.project.mapper.CommentMapper">
+  
+  	<insert id="insert" parameterType="com.medicalInfo.project.model.CommentDTO">
+		INSERT INTO comment (writer, content, table_type, prescript_no, writerName) 
+  		VALUES (#{writer},#{content},#{table_type},#{prescript_no},#{writerName})
+	</insert>
+	
+	<insert id="insertCommentPrescriptNo" parameterType="com.medicalInfo.project.model.CommentDTO"
+  		keyColumn="prescript_no" keyProperty="prescript_no" useGeneratedKeys="true">
+  		INSERT INTO comment (writer, content, table_type, prescript_no, writerName) 
+  		VALUES (#{writer},#{content},#{table_type},#{prescript_no},#{writerName})
+  	</insert>
+
+	<select id="select" resultType="com.medicalInfo.project.model.CommentDTO">
+  		SELECT writerName, content, created_at FROM comment WHERE prescript_no = #{prescript_no}
+  	</select>
+  	
+  	<select id="selectcomment" resultType="com.medicalInfo.project.model.CommentDTO">
+  		SELECT comment_id, writerName, content, created_at FROM comment WHERE comment_id = #{comment_id}
+  	</select>
+  	
+  	<update id="update" parameterType="com.medicalInfo.project.model.CommentDTO">
+  		UPDATE comment SET comment_id = #{comment_id}, writer = #{writer}, content = #{content}, table_type = #{table_type}, prescript_no = #{prescript_no}, writerName = #{writerName} 
+  		WHERE comment_id = #{comment_id}
+  	</update>
+
+	<delete id="delete" parameterType="com.medicalInfo.project.model.CommentDTO">
+		DELETE FROM comment WHERE comment_id = #{comment_id}
+	</delete>
+  
+  
+  	<select id="getComments" resultType="com.medicalInfo.project.model.CommentDTO" parameterType="com.medicalInfo.project.model.CommentDTO">
+  		   SELECT comment_id,writer,content,rating_id,table_type,qa_no,created_at,writerName,memberType
+           FROM comment WHERE qa_no=#{qa_id} ORDER BY created_at DESC
+  	</select>
+  	
+  	<insert id="QAComInsert" parameterType="com.medicalInfo.project.model.CommentDTO">
+  	 <choose>
+  	 	<when test="prescript_no == 0">
+       	  INSERT INTO comment (writer, content, table_type, qa_no, writerName,memberType) 
+          VALUES (#{writer},#{content},#{table_type},#{qa_no},#{writerName},#{memberType})
+       </when>
+       <otherwise>
+          INSERT INTO comment (writer, content, table_type, qa_no, writerName,memberType,prescript_no ) 
+          VALUES (#{writer},#{content},#{table_type},#{qa_no},#{writerName},#{memberType},#{prescript_no})
+       </otherwise>
+    </choose>
+
+    </insert>
+  	
+  	<update id="QAComUpdate" parameterType="com.medicalInfo.project.model.CommentDTO">
+          UPDATE comment SET  content = #{content}
+          WHERE comment_id = #{comment_id}
+      </update>
+      
+    <delete id="QaComDelete"  parameterType="com.medicalInfo.project.model.CommentDTO">
+  		DELETE FROM comment WHERE comment_id = #{comId}
+  	</delete>
+  	
+  	<select id="expertType" parameterType="com.medicalInfo.project.model.MemberInfoDTO" resultType="com.medicalInfo.project.model.MemberType">
+		SELECT memberType FROM member_info WHERE memberNum=#{writer};
+	</select>
+	
+	<insert id="RatingInsert" parameterType="com.medicalInfo.project.model.RatingDTO">
+       	 INSERT INTO rating (memberNum, ratedtable_type, membertype, ratedqa_no, rate, expertNum, expertype) 
+         VALUES (#{memberNum},#{ratedtable_type},#{membertype},#{ratedqa_no},#{rate},#{expertNum},#{expertype})
+    </insert>
+    <insert id="RatingPrescriptInsert" parameterType="com.medicalInfo.project.model.RatingDTO">
+       	 INSERT INTO rating (memberNum, ratedtable_type, membertype, ratedtprescript_no, rate, expertNum, expertype) 
+         VALUES (#{memberNum},'PRESCRIPT',#{membertype},#{ratedtprescript_no},#{rate},#{expertNum},#{expertype})
+    </insert>
+    
+  	
+  </mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.medicalInfo.project.mapper.NoticeMapper">
+	<insert id="saveNotice" parameterType="com.medicalInfo.project.model.NoticeDTO">
+		 INSERT INTO announcement (title, member_num, writerName, content, fileName, uniqueName , fileType)
+        VALUES (#{title}, #{member_num}, #{writerName}, #{content}, #{fileName}, #{uniqueName}, #{fileType})
+	</insert>
+	
+	<update id="modNotice" parameterType="com.medicalInfo.project.model.NoticeDTO">
+		UPDATE announcement SET title = #{title}, content = #{content} 
+		WHERE id_announcement = #{id_announcement}
+	</update>
+	
+	<select id="getTotalCount" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(id_announcement) FROM announcement;
+	</select>
+	
+  	<select id="getListWithPasing" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.NoticeDTO">
+		SELECT * FROM announcement ORDER BY created_at DESC  LIMIT #{start},#{amount}
+	</select>
+	
+	<!-- <select id="" parameterType="int" resultType="com.medicalInfo.project.model.PrevNextNoticeDTO">
+		   SELECT
+            (SELECT id_announcement FROM notices WHERE id_announcement < #{id_announcement} ORDER BY id_announcement DESC LIMIT 1) AS prevId,
+            (SELECT title FROM notices WHERE id_announcement < #{id_announcement} ORDER BY id_announcement DESC LIMIT 1) AS prevTitle,
+            (SELECT id_announcement FROM notices WHERE id_announcement > #{id_announcement} ORDER BY id_announcement ASC LIMIT 1) AS nextId,
+            (SELECT title FROM notices WHERE id_announcement > #{id_announcement} ORDER BY id_announcement ASC LIMIT 1) AS nextTitle
+	</select>
+    -->
+</mapper>

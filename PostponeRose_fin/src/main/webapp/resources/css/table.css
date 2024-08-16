@@ -1,0 +1,948 @@
+.table-container {
+	display: block;
+  	text-align: center;
+}
+
+.table-container h2 {
+	display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 1.5em;
+    color: #07233E;
+}
+
+
+.table-container h2:before {
+	content: "\25C0";
+  	position: absolute;
+ 	left: -50px;
+  	-webkit-animation: leftRight 2s linear infinite;
+  	animation: leftRight 2s linear infinite;
+}
+
+.table-container h2:after {
+	 content: "\25b6";
+ 	 position: absolute;
+  	 right: -50px;
+  	 -webkit-animation: leftRight 2s linear infinite reverse;
+  	 animation: leftRight 2s linear infinite reverse;
+}
+
+@-webkit-keyframes leftRight {
+  0%    { -webkit-transform: translateX(0)}
+  25%   { -webkit-transform: translateX(-10px)}
+  75%   { -webkit-transform: translateX(10px)}
+  100%  { -webkit-transform: translateX(0)}
+}
+
+@keyframes leftRight {
+  0%    { transform: translateX(0)}
+  25%   { transform: translateX(-10px)}
+  75%   { transform: translateX(10px)}
+  100%  { transform: translateX(0)}
+}
+
+/* medi-table */
+.medi-table {
+  margin: auto;
+  min-width: 300px;
+  max-width: 120%;
+  border-collapse: collapse;
+}
+
+.medi-table thead tr:first-child {
+  border-top: none;
+  background: rgba(0, 0, 0, .03);
+  color: #000;
+}
+
+.medi-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.medi-table th {
+  display: none;
+}
+
+.medi-table td {
+  display: block;
+}
+
+.mypage-table td:first-child {
+  margin-top: .5em;
+}
+
+.medi-table td:last-child {
+  margin-bottom: .5em;
+}
+
+.medi-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #333;
+}
+
+.medi-table th,
+.medi-table td {
+  text-align: center;
+}
+
+.medi-table {
+  color: #333;
+  overflow: hidden;
+}
+
+.medi-table tr {
+  border-color: #bfbfbf;
+}
+
+.medi-table th,
+.medi-table td {
+  padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+  .medi-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .medi-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, .06);
+  }
+  .medi-table td:before {
+    display: none;
+  }
+  .medi-table thead tr th,
+  .medi-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .medi-table thead tr th:first-child,
+  .medi-table td:first-child {
+    padding-left: 0;
+  }
+  .medi-table thead tr th:last-child,
+  .medi-table td:last-child {
+    padding-right: 0;
+  }
+  .medi-table thead tr th:first-child,
+  .medi-table td {
+    padding: 1em !important;
+  }
+}
+
+/* medicine-table */
+.medicine-table {
+  margin: auto;
+  min-width: 300px;
+  max-width: 120%;
+  border-collapse: collapse;
+}
+
+.medicine-table thead tr:first-child {
+  border-top: none;
+  background: rgba(0, 0, 0, .03);
+  color: #333;
+}
+
+.medicine-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.medicine-table th {
+  display: none;
+}
+
+.medicine-table td {
+  display: block;
+}
+
+.medicine-table td:first-child {
+  margin-top: .5em;
+}
+
+.medicine-table td:last-child {
+  margin-bottom: .5em;
+}
+
+.medicine-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #000;
+}
+
+.medicine-table th,
+.medicine-table td {
+  text-align: center;
+}
+
+.medicine-table {
+  color: #333;
+  overflow: hidden;
+}
+
+.medicine-table tr {
+  border-color: #bfbfbf;
+}
+
+.medicine-table th,
+.medicine-table td {
+  padding: .25em .5em;
+}
+@media screen and (max-width: 601px) {
+  .medicine-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .medicine-table td:before {
+    display: none;
+  }
+  .medicine-table thead tr th,
+  .medicine-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .medicine-table thead tr th:first-child,
+  .medicine-table td:first-child {
+    padding-left: 0;
+  }
+  .medicine-table thead tr th:last-child,
+  .medicine-table td:last-child {
+    padding-right: 0;
+  }
+  .medicine-table thead tr th:first-child,
+  .medicine-tabletd {
+    padding: 1em !important;
+  }
+}
+
+/* datatablesSimple-table */
+#mediSerchList h3 {
+	float: left;
+	font-weight: bold;
+	color: #1A76D1;
+}
+
+#mediSerch {
+	text-align: right;
+	margin-bottom: 15px;
+}
+
+#mediSerch input {
+	width: 200px;
+	height: 32px;
+	border: 2px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1em;
+}
+
+#mediSerch .mediSerch-btn {
+	width: 60px;
+	height: 30px;
+	border: none;
+	border-radius: 4px;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Pretendard-Regular';
+}
+
+#mediSerch .mediSerch-btn:hover {
+    background: #2C2D3F;
+    border: none;
+}
+
+#mediSerchSection {
+	margin: 0 auto;
+}
+
+#mediSerchSection h3 {
+	text-align: left;
+	color: #1A76D1;
+	font-weight: bold;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#mediSerchTitle {
+	text-align: right;
+}
+
+#mediSerchTitle .serch-btn {
+	width: 60px;
+	height: 35px;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	border: none;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Pretendard-Regular';
+}
+
+#mediSerchTitle .serch-btn:hover {
+    background: #2C2D3F;
+    border: none;
+}
+
+#datatablesSimple {
+  margin: 0 auto;
+  min-width: 300px;
+  max-width: 120%;
+  border-collapse: collapse;
+}
+
+#datatablesSimple thead tr:first-child {
+  border-top: none;
+  background: rgba(0, 0, 0, .03);
+  color: #000;
+}
+
+#datatablesSimple tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#datatablesSimple th {
+  display: none;
+}
+
+#datatablesSimple td {
+  display: block;
+}
+
+#datatablesSimple td:first-child {
+  margin-top: .5em;
+}
+
+#datatablesSimple td:last-child {
+  margin-bottom: .5em;
+}
+
+#datatablesSimple td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #333;
+}
+
+#datatablesSimple th,
+#datatablesSimple td {
+  text-align: center;
+}
+
+#datatablesSimple {
+  color: #333;
+  overflow: hidden;
+}
+
+#datatablesSimple tr {
+  border-color: #bfbfbf;
+}
+
+#datatablesSimple th,
+#datatablesSimple td {
+  padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+  #datatablesSimple tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  #datatablesSimple tbody tr:hover {
+    background-color: rgba(0, 0, 0, .06);
+  }
+  #datatablesSimple td:before {
+    display: none;
+  }
+  #datatablesSimple thead tr th,
+  #datatablesSimple td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  #datatablesSimple thead tr th:first-child,
+  #datatablesSimple td:first-child {
+    padding-left: 0;
+  }
+  #datatablesSimple thead tr th:last-child,
+  #datatablesSimple td:last-child {
+    padding-right: 0;
+  }
+  #datatablesSimple thead tr th:first-child,
+  #datatablesSimple td {
+    padding: 1em !important;
+  }
+}
+
+/* medi-tab Table */
+.medi-tab {
+  width: 920px;
+  margin: 0 auto;
+}
+
+.medi-tab ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+.medi-tab ul.tabs li{
+  background: none;
+  color: #000;
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 550;
+}
+
+.medi-tab ul.tabs li.current{
+  background-color: rgba(0, 0, 0, .06);
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, .08); 
+}
+
+.medi-tab .tab-content{
+  display: none;
+  background: rgba(0, 0, 0, .03);
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.medi-tab .tab-content.current{
+  display: inherit;
+  border: 1px solid rgba(0, 0, 0, .08); 
+}
+
+/* Qa */
+.qa-title {
+	margin: 0 auto;
+	width: 100%;
+	height: 45px;
+	background-color: rgba(0, 0, 0, .06);
+	align-content: center;
+	border-bottom: 1px solid rgba(0, 0, 0, .08);
+}
+
+.qa-title #span1, .qa-title #span2, .qa-title #span3 {
+	float: left;
+	margin-left: 20px;
+}
+
+.qa-title #span4 {
+	float: right;
+	margin-right: 20px;
+}
+
+.qa-title input {
+	border-radius: 4px;
+}
+
+#qaPreNum input {
+	border-radius: 4px;
+	width: 40px;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.qa-title .span3-writer input {
+	background-color: rgba(0, 0, 0, .01);
+}
+
+.qa-content {
+	width: 100%;
+	height: 300px;
+	text-align: left;
+	background-color: rgba(0, 0, 0, .02);
+}
+
+.qa-content p {
+	padding: 30px;
+}
+
+.qa-content textarea {
+	height: 200px;
+}
+
+#qaPrescriptTitle {
+	text-align: left;
+	font-weight: bold;
+}
+
+#qaPrescript {
+	margin: 0 auto;
+	width: 100%;
+	height: 45px;
+	background-color: rgba(0, 0, 0, .03);
+	align-content: center;
+}
+
+#qaPrescriptContent1 {
+	padding: 10px;
+}
+
+#qaPrescriptContent1 #qaPreSpan1 {
+	float: left;
+	margin-left: 20px;
+}
+
+#qaPrescriptContent1 #qaPreSpan2 {
+	margin-left: 10px;
+}
+
+#qaPrescriptContent1 #qaPreSpan3 {
+	margin-left: 50px;
+}
+
+#qaPrescriptContent1 #qaPreSpan4 {
+	margin-left: 10px;
+}
+
+#qaPrescriptContent1 #qaPreSpan5 {
+	float: right;
+	margin-right: 20px;
+}
+
+#qaComentTitle {
+	text-align: left;
+	font-weight: bold;
+	color: #1A76D1;
+}
+
+/* 기본 테이블 스타일 */
+#qaComment {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    align-content: center;
+}
+
+/* 테이블 헤더 스타일 */
+#qaComment thead tr {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ddd;
+}
+
+/* 테이블 행 스타일 */
+#qaComment tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#qaComment tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+/* 셀 스타일 */
+#qaComment td {
+    padding: 12px 10px;
+}
+
+/* 작성자 이름 스타일 */
+#qaComment .user-name {
+    color: #333;
+}
+
+/* 댓글 내용 스타일 */
+#qaComment input[type="text"] {
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+#qaComment button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#qaComment .modMode {
+    background-color: #1A76D1;
+    color: white;
+}
+
+#qaComment .DeleteMode {
+    background-color: #000;
+    color: white;
+}
+
+#qaComment button:hover {
+    opacity: 0.8;
+}
+
+/* 숨겨진 필드 스타일 */
+#qaComment input[type="hidden"] {
+    display: none;
+}
+
+#qaCommentWrite {
+	margin: 0 auto;
+}
+
+#qaCommentWrite textarea {
+	width: 600px;
+	height: 150px;
+}
+
+ #qaPreNum {
+    text-align: left; 
+    margin-left: 0; 
+}
+.card {
+    margin-bottom: 20px; 
+}
+
+#qaListBtn {
+	text-align: right;
+	font-family: 'Pretendard-Regular';
+}
+
+/* 검색 스타일 */
+.qa-serch {
+	display: flex;
+}
+
+#searchForm {
+	float: left;
+}
+
+#searchForm #serchInput {
+	margin-left: 80px; 
+	display: flex;
+}
+
+#searchForm #serchInput input {
+	margin-top: 5px; 
+}
+
+#searchForm #serchInput button {
+	margin-left: 5px;
+	margin-top: 5px; 
+	margin-right: 535px;
+	width: 30px;
+	height: 30px;
+	border: none;
+	border-radius: 4px;
+}
+
+.qa-serch #serchBtn {
+	float: right;
+	font-family: 'Pretendard-Regular';
+}
+
+.qa-serch #serchBtn .qa-btn {
+	width: 80px;
+	height: 35px;
+	border-radius: 4px;
+	border: none;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Pretendard-Regular';
+}
+
+.qa-serch #serchBtn .qa-btn:hover {
+    background: #2C2D3F;
+    border: none;
+}
+
+#QaTable {
+  margin: 0 auto;
+  min-width: 300px;
+  max-width: 120%;
+  border-collapse: collapse;
+}
+
+#QaTable thead tr:first-child {
+  border-top: none;
+  background: rgba(0, 0, 0, .03);
+  color: #000;
+}
+
+#QaTable tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#QaTable th {
+  display: none;
+}
+
+#QaTable td {
+  display: block;
+}
+
+#QaTable td:first-child {
+  margin-top: .5em;
+}
+
+#QaTable td:last-child {
+  margin-bottom: .5em;
+}
+
+#QaTable td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #333;
+}
+
+#QaTable th,
+#QaTable td {
+  text-align: center;
+}
+
+#QaTable {
+  color: #333;
+  overflow: hidden;
+}
+
+#QaTable tr {
+  border-color: #bfbfbf;
+}
+
+#QaTable th,
+#QaTable td {
+  padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+  #QaTable tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  #QaTable tbody tr:hover {
+    background-color: rgba(0, 0, 0, .06);
+  }
+  #QaTable td:before {
+    display: none;
+  }
+  #QaTable thead tr th,
+  #QaTable td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  #QaTable thead tr th:first-child,
+  #QaTable td:first-child {
+    padding-left: 0;
+  }
+  #QaTable thead tr th:last-child,
+  #QaTable td:last-child {
+    padding-right: 0;
+  }
+  #QaTable thead tr th:first-child,
+  #QaTable td {
+    padding: 1em !important;
+  }
+}
+
+.table-container #rateExpert {
+	width: 100%;
+	height: 80px;
+	display: flex;
+}
+
+.table-container #rateExpert h5, .table-container #rateExpert input {
+	float: left;
+}
+
+.no-rating {
+    text-align: center;
+    font-weight: bold; /* Optional: to make the text stand out more */
+}
+
+#rateExpert {
+	margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+#starRateingMent {
+	height: 30px;
+	margin-left: 130px;
+	align-content: center;
+}
+
+/* mypage */
+.patient-tab {
+    background-color: rgba(0, 0, 0, 0.06); /* 메뉴바 배경색 */
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 경계선 */
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.patient-tab ul {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.patient-tab li {
+    margin-right: 20px; /* 각 탭 사이 간격 */
+}
+
+.patient-tab a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8); /* 링크 텍스트 색상 */
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.patient-tab a:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* 링크 호버 배경색 */
+}
+
+/* mypage prescriptDetail */
+.myPrescript-container {
+	width: 900px;
+	align-content: center;
+}
+
+.myPrescript-container div:first-child {
+	text-align: right;
+}
+
+.myPrescript-container div:nth-child(2) {
+	text-align: right;
+}
+
+.myPrescript-container div:nth-child(3) {
+	width: 900px;
+	display: flex;
+}
+
+.myPrescript-container div:nth-child(3) div:first-child {
+	text-align: left;
+	margin-left: 0;
+}
+
+.myPrescript-container div:nth-child(3) div:nth-child(2) {
+	text-align: right;
+	margin-left: 345px;
+}
+
+#myPreRatingTitle {
+	text-align: center;
+	font-weight: bolder;
+}
+
+#myPreSerchBtn {
+	float: right;
+	font-family: 'Pretendard-Regular';
+}
+
+.myPre-btn {
+	width: 100px;
+	height: 35px;
+	border-radius: 4px;
+	border: none;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Pretendard-Regular';
+}
+
+.myPre-btn:hover {
+    background: #2C2D3F;
+    border: none;
+}
+
+.medicine-btn {
+	width: 30px;
+	height: 23px;
+	border-radius: 3px;
+	border: none;
+    background-color: #888;
+    color: #fff;
+    font-size: 0.8em;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+}
+
+.medicines-btn:hover {
+	background: #2C2D3F;
+    border: none;
+}
+
+.medicines-btn {
+	width: 80px;
+	height: 30px;
+	border-radius: 4px;
+	border: none;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 0.9em;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+}
+
+.medicine-btn:hover {
+	background: #2C2D3F;
+    border: none;
+}
+
+.prescriptWrite-mediBox {
+	text-align: left;
+}
+
+.prescriptWrite-expertBox {
+	text-align: right;
+}
+
+.prescriptWrite-expertBox label {
+	font-weight: bold;
+}
+
+.prescriptWrite-mediBox #patientName, .prescriptWrite-mediBox #lookupBtn, 
+.prescriptWrite-mediBox #prescribingInstitution {
+	margin-right: 10px;
+}
+
+.prescriptWrite-mediBox #phoneNum {
+	margin-right: 30px;
+}
+
+.prescriptWrite-mediBox #mediBoxs input {
+	margin-right: 10px;
+}
+
+.medis-btn {
+	float: right;
+	width: 80px;
+	height: 30px;
+	border-radius: 4px;
+	border: none;
+    background-color: #2C2D3F;
+    color: #fff;
+    font-size: 0.9em;
+    text-align: center;
+    align-content: center;
+    font-family: 'Pretendard-Regular';
+}
+
+.medis-btn:hover {
+	opacity: 0.8;
+    border: none;
+}

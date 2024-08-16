@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.medicalInfo.project.mapper.BestExpertMapper">
+ 
+  	<select id="bestExpert"  resultType="com.medicalInfo.project.model.RatingDTO" >
+		SELECT expertNum,ROUND(AVG(rate), 1) AS rate
+		FROM rating
+		GROUP BY expertNum
+		ORDER BY rate DESC
+		LIMIT 0,1;
+	</select>
+	
+	<select id="firstExpert" resultType="com.medicalInfo.project.model.MemberInfoDTO" parameterType="int" >
+		SELECT * FROM member_info WHERE memberNum = #{expertNum};
+	</select>
+	
+	<select id="ExpertName" resultType="com.medicalInfo.project.model.MemberDTO" parameterType="int" >
+		SELECT memberName FROM member WHERE memberNum = #{expertNum};
+	</select>
+	
+	<select id="bestSecondExpert"  resultType="com.medicalInfo.project.model.RatingDTO" >
+		SELECT expertNum,ROUND(AVG(rate), 1) AS rate
+		FROM rating
+		GROUP BY expertNum
+		ORDER BY rate DESC
+		LIMIT 1,1;
+	</select>
+	
+	<select id="bestThirdExpert"  resultType="com.medicalInfo.project.model.RatingDTO" >
+		SELECT expertNum,ROUND(AVG(rate), 1) AS rate
+		FROM rating
+		GROUP BY expertNum
+		ORDER BY rate DESC
+		LIMIT 2,1;
+	</select>
+	
+	
+	<select id="myRating" resultType="com.medicalInfo.project.model.RatingDTO" parameterType="int" >
+		SELECT ROUND(AVG(rate), 1) AS rate FROM rating WHERE expertNum = #{expertNum};
+	</select>
+	
+	
+	
+	<select id="getListTotalCount" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(*)  FROM(SELECT COUNT(r.expertNum)   FROM
+            rating r
+        INNER JOIN
+            member m ON r.expertNum = m.memberNum
+        INNER JOIN
+            member_info mi ON m.memberNum = mi.memberNum
+        <where>
+        	
+			<if test="type != null and keyword != null and type != '' and keyword != ''">
+				<choose>
+					<when test="type == 'all'">
+					(m.memberName LIKE CONCAT("%",#{keyword},"%") OR
+					mi.institutionName LIKE CONCAT("%",#{keyword},"%"))
+					</when>
+					<otherwise>
+						<if test="type == 'name'">
+                        m.memberName LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                    <if test="type == 'institution'">
+                        mi.institution LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                   
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		GROUP BY
+            r.expertNum) s ;
+	</select>
+	
+	
+	
+	<select id="getListWithSearch" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.RatingTotDTO">
+		 SELECT r.expertNum,ROUND(AVG(r.rate),1) AS averageRate, m.memberNum, m.memberName, mi.institutionAddress, mi.institutionTel,
+		  mi.institutionName, mi.pictureName,mi.picuniName, mi.picType 
+		 FROM rating r 
+        INNER JOIN member m
+             ON r.expertNum = m.memberNum
+        INNER JOIN member_info mi
+             ON m.memberNum = mi.memberNum
+        <where>
+			<if test="type != null and keyword != null and type != '' and keyword != ''">
+				<choose>
+					<when test="type == 'all'">
+					(m.memberName LIKE CONCAT("%",#{keyword},"%") OR
+					mi.institutionName LIKE CONCAT("%",#{keyword},"%"))
+					</when>
+					<otherwise>
+						<if test="type == 'name'">
+                        m.memberName LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                    <if test="type == 'institution'">
+                        mi.institution LIKE CONCAT("%", #{keyword},"%")
+                    </if>
+                   
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+        GROUP BY
+            r.expertNum
+		ORDER BY r.expertNum LIMIT #{start}, #{amount};
+	</select>
+	
+	<select id="getMPRT" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(*)  FROM
+            rating r
+        INNER JOIN
+            prescript p ON r.ratedtprescript_no = p.prescript_no      
+        <where>
+        	expertNum = #{memberNum_expert} AND ratedtable_type ='PRESCRIPT'
+			
+		</where>
+	</select>
+	<select id="prescriptRatingList" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.MyPrescriptRatingDTO">
+		SELECT prescript_no, patient_name, patient_phone, prescribed_date,rate FROM
+            rating r
+        INNER JOIN
+            prescript p ON r.ratedtprescript_no = p.prescript_no      
+        <where>
+        	expertNum = #{memberNum_expert} AND ratedtable_type ='PRESCRIPT'
+			
+		</where> 
+		ORDER BY prescribed_date DESC LIMIT #{start}, #{amount};
+	</select>
+	<select id="getMQRT" resultType="int" parameterType="com.medicalInfo.project.model.Criteria">
+		SELECT COUNT(*)  FROM
+            rating r
+        INNER JOIN
+            qa q ON r.ratedqa_no = q.qa_id     
+        <where>
+        	expertNum = #{memberNum_expert} AND ratedtable_type ='QACOMMENT'
+			
+		</where>
+	</select>
+	<select id="qaRatingList" parameterType="com.medicalInfo.project.model.Criteria" resultType="com.medicalInfo.project.model.MyQaRatingDTO">
+		SELECT qa_id,title,writer,created_at,rate FROM
+            rating r
+        INNER JOIN
+            qa q ON r.ratedqa_no = q.qa_id     
+        <where>
+        	expertNum = #{memberNum_expert} AND ratedtable_type ='QACOMMENT'
+			
+		</where>
+		ORDER BY created_at DESC LIMIT #{start}, #{amount};
+	</select>
+  </mapper>

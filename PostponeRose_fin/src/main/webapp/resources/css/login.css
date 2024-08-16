@@ -1,0 +1,424 @@
+/*
+	회원 Login
+*/
+@font-face {
+    font-family: 'KimjungchulGothic-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulGothic-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+.login .mainImage-box {
+	margin-top: 50px;
+    height: 200px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login .mainImage-box-background-image {
+	border-radius: 16px;
+}
+
+.login .mainImage-contentBox {
+	margin-top: 20px;
+    height: 500px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login .login-box {
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login .login-boxs {
+    height: 550px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-container {
+	padding-top: 90px;
+}
+
+.login-text {
+	width: 600px;
+	height: 500;
+	margin-left: 20px;
+}
+
+.login-text .text1 {
+	margin-bottom: 20px;
+	color: #fff;
+	font-weight: bolder;
+	font-size: 3em;
+	text-align: left;
+}
+
+.login-text .text2 {
+	margin-top: 20px;
+	color: #fff;
+	font-weight: 540;
+	font-size: 2em;
+	text-align: left;
+}
+
+
+/*
+	회원 Loginidpwd
+*/
+#loginContainer {
+	display: flex;
+	align-items: center;
+}
+
+#loginBox {
+	float: right;
+    width: 430px;
+    height: 350px;
+    border-radius: 16px;
+    background-color: #fff;
+    text-align: center;
+    align-content: center;
+}
+
+#loginForm td {
+    padding-bottom: 5px;
+}
+
+#loginForm tr td input {
+	width: 350px;
+	height: 55px;
+	border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 2px 6px 2px 44px;
+    background-color: #fff;
+    font-size: 1em;
+}
+
+#loginBox .login-btn {
+	width: 350px;
+	height: 55px;
+	margin-bottom: 35px;
+	border-radius: 8px;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Pretendard-Regular';
+}
+
+#loginBox .login-btn:hover {
+    background: #2C2D3F;
+}
+
+#loginBox span {
+	margin-right: 50px;
+	float: right;
+	font-size: 1em;
+}
+
+#loginBox span button {
+	border: none;
+	background: none;
+	color: #888;
+}
+
+
+/*
+	kakaoLogin
+*/
+#kakaoLoginContainer {
+	display: flex;
+	align-items: center;
+}
+
+#kakaoLoginBox {
+	padding: 30px;
+    width: 450px;
+    border-radius: 16px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#kakaoLoginBox h3 {
+	margin-bottom: 10px;
+}
+
+#kakaoLoginBox h1 {
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+#kakaoLoginBox .medisearch {
+	height: 120px;
+	padding: 10px;
+	padding-top: 15px;
+	margin-top: 20px;
+	border-radius: 8px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, .06);
+}
+
+#kakaoLoginBox .medisearch p {
+	font-size: large;
+	font-weight: 550;
+	padding: 10px 0 5px 0;
+	color: #888;
+}
+
+#kakaoLoginBox #medisearchForm {
+	width: 280px;
+	height: 35px;
+	border: 2px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1em;
+}
+
+#kakaoLoginBox .medisearch-btn {
+	width: 60px;
+	height: 35px;
+	margin-bottom: 35px;
+	border-radius: 4px;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    font-family: 'Pretendard-Regular';
+}
+
+#kakaoLoginBox .medisearch-btn:hover {
+    background: #2C2D3F;
+}
+
+
+
+
+
+
+
+
+
+#kakaoLogoutBox {
+	
+    padding: 30px;
+    width: 450px;
+    border-radius: 16px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#kakaoLogoutBox h1 {
+	font-weight: bold;
+}
+
+#kakaoLogoutBox h3 {
+	font-weight: bold;
+}
+
+
+
+#memberInfo {
+	text-align: left;
+	border: 4px solid #EDF2FF;
+	border-radius: 8px;
+	padding: 10px;
+}
+
+#memberGrade p {
+	text-align: right;
+	padding: 15px 0 15px 0;
+	font-weight: bold;
+}
+
+
+
+#memberInfo #memberInfo1 p {
+	font-weight: 550;
+}
+
+#memberInfo #memberInfo2 p {
+	font-weight: 550;
+}
+
+#applyExpert {
+	text-align: right;
+}
+
+#applyExpert p {
+	font-weight: bold;
+	font-size: small;
+	padding: 10px;
+}
+
+#applyExpert strong {
+	color: #1A76D1;
+	text-decoration: underline;
+}
+
+#kakaoLogoutBox .medisearch {
+	height: 120px;
+	padding: 10px;
+	padding-top: 15px;
+	border-radius: 8px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, .06);
+}
+
+#kakaoLogoutBox .medisearch p {
+	font-size: large;
+	font-weight: 550;
+	padding: 10px 0 10px 0;
+	color: #888;
+}
+
+#kakaoLogoutBox #medisearchForm {
+	width: 280px;
+	height: 35px;
+	border: 2px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1em;
+}
+
+#kakaoLogoutBox .medisearch-btn {
+	width: 60px;
+	height: 35px;
+	margin-bottom: 35px;
+	border-radius: 4px;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    font-family: 'Pretendard-Regular';
+}
+
+#kakaoLogoutBox .medisearch-btn:hover {
+    background: #2C2D3F;
+}
+
+.content div:first-child {
+	margin: 0 auto;
+}
+
+.textboxs {
+	width: 550px;
+	height: 250px;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	align-content: center;
+	transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.textboxs:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btns {
+	width: 130px;
+	height: 45px;
+	border-radius: 4px;
+	border: none;
+    background-color: #1A76D1;
+    color: #fff;
+    font-size: 0.9em;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+}
+
+.btns:hover {
+	background: #2C2D3F;
+    border: none;
+}
+
+
+
+
+
+.findpw-box div:first-child {
+	margin: 0 auto;
+}
+
+.findpw {
+	width: 550px;
+	height: 600px;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	align-content: center;
+	transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.findpw:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/*
+	실시간 전문의 배너
+*/
+.expert-container {
+	height: 400px;
+	margin: 50px;
+	align-content: center;
+}
+
+.wrap {
+	height: 300px;
+	width: 1080px;
+    display: flex; 
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, .06);
+}
+.wrap .rolling-list ul {
+    padding : 0px;
+    display: flex;
+    text-align: center;
+    margin-top: 10px;
+    
+}
+.wrap .rolling-list ul li { 
+	width: 360px;
+	height: 290px;
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    flex-shrink: 0; 
+}
+
+.wrap .rolling-list ul li input { 
+	width: 150px;
+	border: 2px solid #eee;
+    border-radius: 8px;
+}
+
+.rolling-list.original {
+    animation: rollingleft1 90s linear infinite;
+}
+.rolling-list.clone {
+    animation: rollingleft2 90s linear infinite;
+}
+
+@keyframes rollingleft1 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-100%); }
+    50.01% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes rollingleft2 {
+    0% { transition: translateX(0); }
+    100% { transform: translateX(-200%); }
+}
